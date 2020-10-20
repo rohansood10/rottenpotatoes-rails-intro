@@ -10,7 +10,12 @@ class MoviesController < ApplicationController
     
     @all_ratings = Movie.all_ratings
     @ratings_to_show = Movie.ratings_to_show(params[:ratings])
-    @movies = Movie.with_ratings(@ratings_to_show)
+    if @ratings_to_show == []
+      @movies = Movie.with_ratings(@all_ratings)
+    else
+      @movies = Movie.with_ratings(@ratings_to_show)
+    end
+    
   end
 
   def new

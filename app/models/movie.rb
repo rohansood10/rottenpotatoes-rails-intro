@@ -7,14 +7,14 @@ class Movie < ActiveRecord::Base
     if checkbox_ratings != nil
       checkbox_ratings.keys
     else
-      self.all_ratings
+      []
     end
   end
   def self.with_ratings(ratings_list)
     if ratings_list != nil
       Movie.where(rating: ratings_list)
     else
-      Movie
+      Movie.all
     end
   # if ratings_list is an array such as ['G', 'PG', 'R'], retrieve all
   #  movies with those ratings
