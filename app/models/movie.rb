@@ -7,7 +7,7 @@ class Movie < ActiveRecord::Base
     if checkbox_ratings != nil
       checkbox_ratings.keys
     else
-      []
+      self.all_ratings
     end
   end
   def self.with_ratings(ratings_list)
