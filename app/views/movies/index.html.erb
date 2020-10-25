@@ -16,11 +16,11 @@
   <thead>
     <tr>
       <th class = "<%= @title_header %>">
-        <a href="<%= movies_path({:sort_by => 'title'}) %>" id = "title_header">Movie Title</a>
+        <a href="<%= movies_path({:sort_by => 'title', :ratings => Hash[@ratings_to_show.map {|x| [x, 1]}]}) %>" id = "title_header">Movie Title</a>
       </th>
       <th>Rating</th>
       <th class = "<%= @release_date_header %>">
-        <a href="<%= movies_path({:sort_by => 'release_date'}) %>" id = "release_date_header">Release Date</a>
+        <a href="<%= movies_path({:sort_by => 'release_date', :ratings => Hash[@ratings_to_show.map {|x| [x, 1]}]}) %>" id = "release_date_header">Release Date</a>
       </th>
       <th>More Info</th>
     </tr>
