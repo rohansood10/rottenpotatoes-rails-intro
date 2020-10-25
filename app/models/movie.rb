@@ -24,9 +24,9 @@ class Movie < ActiveRecord::Base
   def self.with_ratings_sorted(ratings_list, sort_by)
     to_return = self.with_ratings(ratings_list)
     if (sort_by == 'title')
-      to_return.order(title: :desc)
+      to_return.order(title)
     else
-      to_return.order(release_date: :desc)
+      to_return.order(release_date)
     end
   end
 end
