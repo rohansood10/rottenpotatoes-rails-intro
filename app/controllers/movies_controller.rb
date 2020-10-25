@@ -7,13 +7,33 @@ class MoviesController < ApplicationController
   end
 
   def index
-    
+    sort_by = params[:sort_by]
+    if sort_by != nil and sort_by == 'title'
+      @title_header = 'hilite bg-warning'
+      if @release_date_header != nil
+        @release_date_header = nil
+      end
+    end
+    if sort_by != nil and sort_by == 'release_date'
+      @release_date_header = 'hilite bg-warning'
+      if @title_header != nil
+        @title_header = nil
+      end
+    end
     @all_ratings = Movie.all_ratings
     @ratings_to_show = Movie.ratings_to_show(params[:ratings])
-    if @ratings_to_show == []
-      @movies = Movie.with_ratings(@all_ratings)
+    if sort_by == nil
+      if @ratings_to_show == []
+        @movies = Movie.with_ratings(@all_ratings)
+      else
+        @movies = Movie.with_ratings(@ratings_to_show)
+      end
     else
-      @movies = Movie.with_ratings(@ratings_to_show)
+      if @ratings_to_show == []
+        @movies = Movie.with_ratings_sorted(@all_ratings, sort_by)
+      else
+        @movies = Movie.with_ratings_sorted(@ratings_to_show, sort_by)
+      end
     end
     
   end

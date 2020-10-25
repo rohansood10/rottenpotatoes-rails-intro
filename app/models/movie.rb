@@ -20,4 +20,13 @@ class Movie < ActiveRecord::Base
   #  movies with those ratings
   # if ratings_list is nil, retrieve ALL movies
   end
+  
+  def self.with_ratings_sorted(ratings_list, sort_by)
+    to_return = self.with_ratings(ratings_list)
+    if (sort_by == 'title')
+      to_return.order(title: :desc)
+    else
+      to_return.order(release_date: :desc)
+    end
+  end
 end
